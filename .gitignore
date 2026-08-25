@@ -1,0 +1,10 @@
+# Configuración local y credenciales
+.env
+.env.*
+!.env.example
+config.js
+
+# Archivos del sistema y del editor
+.DS_Store
+Thumbs.db
+.vscode/

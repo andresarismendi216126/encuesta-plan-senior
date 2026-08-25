@@ -1,0 +1,5 @@
+window.SUPABASE_CONFIG = {
+  url: 'https://tu-proyecto.supabase.co',
+  anonKey: 'tu-clave-publica-anon',
+  table: 'respuestas_senior_activa'
+};
