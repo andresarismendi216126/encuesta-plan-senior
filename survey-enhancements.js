@@ -1,5 +1,11 @@
 (() => {
   const config = window.SUPABASE_CONFIG || {};
+  const annualBagDescription = 'Los $2.500.000 son el monto máximo total compartido para hospitalización, cirugía y/o urgencias. Puedes utilizar una, dos o las tres atenciones, pero la bolsa completa solo está disponible una vez por vigencia anual.';
+  const annualBag = [...document.querySelectorAll('.bag')].find(element => element.textContent.includes('$2.500.000'));
+  if (annualBag) {
+    const description = annualBag.querySelector('p');
+    if (description) description.textContent = annualBagDescription;
+  }
   const money = value => new Intl.NumberFormat('es-CO', {
     style: 'currency', currency: 'COP', maximumFractionDigits: 0
   }).format(value || 0);
@@ -25,6 +31,7 @@
     const interestData = Object.fromEntries(new FormData(interestForm));
     const monthly = Number(formData.monto_mensual);
     const importancias = Object.fromEntries(Object.entries(interestData).map(([key, value]) => [key, value]));
+    importancias.bolsa_alta_complejidad_descripcion = annualBagDescription;
     const payload = {
       codigo_participante: formData.codigo,
       edad_mascota: formData.edad ? Number(formData.edad) : null,
