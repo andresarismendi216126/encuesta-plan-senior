@@ -43,6 +43,10 @@ jobs:
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
+<<<<<<< HEAD
+=======
+
+>>>>>>> f1d4689da449fac147927d79cdef19bfb38f5d81
 
       - name: Crear artefacto
         uses: actions/upload-pages-artifact@v3
