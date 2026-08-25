@@ -55,9 +55,23 @@ testForm.onsubmit=async event=>{
 	data.escenario_simulado=service.value;
 	data.valor_simulado=+invoice.value;
 	data.copago_simulado=service.value==='preventive'||service.value==='external'?0:Math.max(+invoice.value*.15,40000);
+	data.monto_mensual=Number(data.monto_mensual||0);
+	data.monto_anual_descuento=Math.round(data.monto_mensual*12*.9);
 	try{const result=await saveResponse(data);saveMessage.textContent=result.mode==='supabase'?'Tu respuesta fue enviada.':'Tu respuesta quedó guardada en este navegador mientras se configura la base de datos.'}
 	catch(error){saveMessage.textContent='Guardamos tu respuesta en este navegador, pero no pudimos enviarla a la base de datos.'}
 	thanks.style.display='block';
 };
+document.querySelector('.price')?.remove();
+const importanceSection=document.createElement('section');
+importanceSection.className='section';
+importanceSection.innerHTML='<div class="section-title"><small>MATRIZ DE IMPORTANCIA</small><h2>¿Qué tan importante es cada cobertura para ti?</h2><p>Valora todos los servicios incluidos en la propuesta.</p></div><div class="form-card"><div class="form-body importance-grid">'+[
+	['Teleorientación 24/7','importancia_teleorientacion'],
+	['Chequeo preventivo geriátrico','importancia_chequeo_geriatrico'],
+	['Desparasitación interna','importancia_desparasitacion'],
+	['Vacuna anual','importancia_vacuna_anual']
+].map(([label,name])=>'<div class="field"><label>'+label+'</label><select name="'+name+'" required><option value="">Selecciona una opción</option><option>Imprescindible</option><option>Muy importante</option><option>Poco importante</option><option>No me interesa</option></select></div>').join('')+'</div></div></section>';
+document.querySelector('.form-card')?.closest('.section')?.before(importanceSection);
+const priceField=[...testForm.querySelectorAll('.field')].find(field=>field.textContent.includes('prima anual estimada'));
+if(priceField){priceField.innerHTML='<label for="monto_mensual">¿Cuánto pagarías mensualmente por este plan?</label><input id="monto_mensual" name="monto_mensual" type="number" min="0" step="1000" required placeholder="Ej. 100000"><small id="annualEstimate">Pago anual con 10% de descuento: $0</small>';const monthlyInput=priceField.querySelector('input');const annualEstimate=priceField.querySelector('#annualEstimate');monthlyInput.oninput=()=>annualEstimate.textContent='Pago anual con 10% de descuento: '+money(Math.round(Number(monthlyInput.value||0)*12*.9))}
 </script>
 </body></html>

@@ -10,6 +10,12 @@ create table if not exists public.respuestas_senior_activa (
   acepta_red_cerrada text,
   acepta_declaracion text,
   precio text,
+  monto_mensual integer,
+  monto_anual_descuento integer,
+  importancia_teleorientacion text,
+  importancia_chequeo_geriatrico text,
+  importancia_desparasitacion text,
+  importancia_vacuna_anual text,
   cobertura_valiosa text,
   comentario text,
   mejora text,
@@ -26,4 +32,12 @@ create policy "permitir insertar respuestas anonimas"
 on public.respuestas_senior_activa
 for insert to anon
 with check (true);
+
+alter table public.respuestas_senior_activa
+  add column if not exists monto_mensual integer,
+  add column if not exists monto_anual_descuento integer,
+  add column if not exists importancia_teleorientacion text,
+  add column if not exists importancia_chequeo_geriatrico text,
+  add column if not exists importancia_desparasitacion text,
+  add column if not exists importancia_vacuna_anual text;
 
