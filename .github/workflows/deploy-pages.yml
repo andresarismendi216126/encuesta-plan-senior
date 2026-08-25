@@ -26,12 +26,12 @@ jobs:
 
       - name: Preparar configuración de Supabase
         env:
-          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
-          SUPABASE_TABLE: ${{ vars.SUPABASE_TABLE }}
+          SUPABASE_URL: ${{ vars.SUPABASE_URL || secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY || secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_TABLE: ${{ vars.SUPABASE_TABLE || secrets.SUPABASE_TABLE }}
         run: |
-          test -n "$SUPABASE_URL"
-          test -n "$SUPABASE_ANON_KEY"
+          if [ -z "$SUPABASE_URL" ]; then echo "Falta SUPABASE_URL"; exit 1; fi
+          if [ -z "$SUPABASE_ANON_KEY" ]; then echo "Falta SUPABASE_ANON_KEY"; exit 1; fi
           table="${SUPABASE_TABLE:-respuestas_senior_activa}"
           cat > config.js <<EOF
           window.SUPABASE_CONFIG = {
@@ -43,8 +43,6 @@ jobs:
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Crear artefacto
         uses: actions/upload-pages-artifact@v3
