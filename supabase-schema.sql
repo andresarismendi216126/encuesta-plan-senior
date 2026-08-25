@@ -16,6 +16,7 @@ create table if not exists public.respuestas_senior_activa (
   importancia_chequeo_geriatrico text,
   importancia_desparasitacion text,
   importancia_vacuna_anual text,
+  importancias_coberturas jsonb,
   cobertura_valiosa text,
   comentario text,
   mejora text,
@@ -40,4 +41,7 @@ alter table public.respuestas_senior_activa
   add column if not exists importancia_chequeo_geriatrico text,
   add column if not exists importancia_desparasitacion text,
   add column if not exists importancia_vacuna_anual text;
+
+alter table public.respuestas_senior_activa
+  add column if not exists importancias_coberturas jsonb;
 
