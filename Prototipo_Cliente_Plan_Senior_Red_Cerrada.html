@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
   <head>
     <meta charset="utf-8">
@@ -124,10 +124,6 @@ body{margin:0;font-family:Segoe UI,Aptos,Arial;color:var(--i);background:var(--b
             <h3>PLAN SENIOR ACTIVA</h3>
             <p>Concepto para investigación con clientes.</p>
           </div>
-          <div class="price">
-            <b>$1.100.000</b>
-            <span>prima anual estimada con IVA</span>
-          </div>
         </div>
         <div class="highlights">
           <div class="highlight">
@@ -185,15 +181,15 @@ body{margin:0;font-family:Segoe UI,Aptos,Arial;color:var(--i);background:var(--b
     </div>
     <form class="fbody" id="testForm">
       <div class="field">
-        <label>Código del participante</label>
+        <label>Para comenzar, ¿nos compartes tu código de participante?</label>
         <input name="codigo" required>
       </div>
       <div class="field">
-        <label>Edad de la mascota</label>
+        <label>¿Cuántos años tiene tu mascota?</label>
         <input name="edad" type="number" min="8">
       </div>
       <div class="field">
-        <label>Estrato socioeconómico</label>
+        <label>¿En qué estrato socioeconómico vive tu hogar?</label>
         <select name="estrato_socioeconomico" required>
           <option value="">Selecciona</option>
           <option>1</option>
@@ -205,11 +201,11 @@ body{margin:0;font-family:Segoe UI,Aptos,Arial;color:var(--i);background:var(--b
         </select>
       </div>
       <div class="field">
-        <label>Edad de la persona</label>
+        <label>¿Qué edad tienes?</label>
         <input name="edad_persona" type="number" min="18" required placeholder="Años">
       </div>
       <div class="field">
-        <label>Sexo de la persona</label>
+        <label>¿Cómo te identificas?</label>
         <select name="sexo_persona" required>
           <option value="">Selecciona</option>
           <option>Mujer</option>
@@ -219,7 +215,7 @@ body{margin:0;font-family:Segoe UI,Aptos,Arial;color:var(--i);background:var(--b
         </select>
       </div>
       <div class="field">
-        <label>Sexo de la mascota</label>
+        <label>¿Tu mascota es hembra o macho?</label>
         <select name="sexo_mascota" required>
           <option value="">Selecciona</option>
           <option>Hembra</option>
@@ -228,7 +224,7 @@ body{margin:0;font-family:Segoe UI,Aptos,Arial;color:var(--i);background:var(--b
         </select>
       </div>
       <div class="field">
-        <label>¿Contratarías este plan?</label>
+        <label>Si estuviera disponible, ¿contratarías este plan para tu mascota?</label>
         <select name="intencion">
           <option>Definitivamente sí</option>
           <option>Probablemente sí</option>
@@ -238,7 +234,7 @@ body{margin:0;font-family:Segoe UI,Aptos,Arial;color:var(--i);background:var(--b
         </select>
       </div>
       <div class="field">
-        <label>¿Aceptarías atención solo en la red SURA?</label>
+        <label>¿Qué opinas de recibir la atención únicamente en la red SURA?</label>
         <select name="red">
           <option>Sí</option>
           <option>Depende de cercanía y disponibilidad</option>
@@ -246,18 +242,24 @@ body{margin:0;font-family:Segoe UI,Aptos,Arial;color:var(--i);background:var(--b
         </select>
       </div>
       <div class="field wide">
-        <label>¿Cuánto pagarías por el plan senior para tu mascota?</label>
+        <label>Pensando en el bienestar de tu mascota, ¿cuánto pagarías al año por este plan?</label>
         <div class="prices">
-          <input id="p1" type="radio" name="rango_precio" value="$500.000 a $800.000" required>
-          <label for="p1">$500.000 a $800.000</label>
-          <input id="p2" type="radio" name="rango_precio" value="$800.000 a $1.200.000">
-          <label for="p2">$800.000 a $1.200.000</label>
-          <input id="p3" type="radio" name="rango_precio" value="$1.200.000 a $1.500.000">
-          <label for="p3">$1.200.000 a $1.500.000</label>
+          <input id="p1" type="radio" name="rango_precio" value="$500.000 a $650.000" required>
+          <label for="p1">$500.000 a $650.000</label>
+          <input id="p2" type="radio" name="rango_precio" value="$650.000 a $800.000">
+          <label for="p2">$650.000 a $800.000</label>
+          <input id="p3" type="radio" name="rango_precio" value="$800.000 a $950.000">
+          <label for="p3">$800.000 a $950.000</label>
+          <input id="p4" type="radio" name="rango_precio" value="$950.000 a $1.100.000">
+          <label for="p4">$950.000 a $1.100.000</label>
+          <input id="p5" type="radio" name="rango_precio" value="$1.100.000 a $1.250.000">
+          <label for="p5">$1.100.000 a $1.250.000</label>
+          <input id="p6" type="radio" name="rango_precio" value="$1.250.000 a $1.500.000">
+          <label for="p6">$1.250.000 a $1.500.000</label>
         </div>
       </div>
       <div class="field wide">
-        <label>Sabiendo que consultas especializadas, laboratorio e imágenes ambulatorias, RMN, TAC y endoscopias no están cubiertos, pero podrían tener descuento en la red, ¿contratarías el plan?</label>
+        <label>Algunos servicios podrían tener descuento, pero no cobertura. Sabiendo esto, ¿seguirías interesado en contratar el plan?</label>
         <select name="aceptacion_no_cubiertos" required>
           <option value="">Selecciona</option>
           <option>Lo contrataría igual</option>
@@ -268,7 +270,7 @@ body{margin:0;font-family:Segoe UI,Aptos,Arial;color:var(--i);background:var(--b
         </select>
       </div>
       <div class="field wide">
-        <label>¿Qué cambiarías?</label>
+        <label>¿Qué cambiarías o agregarías para que el plan te resulte más útil?</label>
         <textarea name="mejora">
         </textarea>
       </div>
@@ -283,6 +285,5 @@ body{margin:0;font-family:Segoe UI,Aptos,Arial;color:var(--i);background:var(--b
   </div><script>
 const cs=[['Teleorientación 24/7','Ilimitada','💬',1],['Chequeo preventivo geriátrico','Consulta y panel geriátrico anual','🩺',1],['Desparasitación interna','Una vez al año','🛡️',1],['Vacuna anual','Rabia + pentavalente o triple felina','💉',1],['Consulta general','Ilimitada por enfermedad o accidente','🐾',1],['Consulta domiciliaria','Una vez al año','🏠',1],['Bolsa de alta complejidad','Cirugía, hospitalización y urgencias: $2.500.000 al año','🏥',1],['Eutanasia','Incluida','🤍',1],['Inyección de medicamentos','Hasta $100.000 por evento','💊',1],['RC y gastos de defensa','Opcional para perros, 50 SMMLV','⚖️',1],['Red de beneficios','Incluida','⭐',1],['Consultas especializadas','No cubiertas actualmente; posible descuento','🧑‍⚕️',0],['Laboratorio e imágenes ambulatorias','No cubiertos actualmente; posible descuento','🧪',0],['RMN y TAC','No cubiertos actualmente; posible descuento','🩻',0],['Endoscopias','No cubiertas actualmente; posible descuento','🔬',0]];
 coverageGrid.innerHTML=cs.map((c,i)=>`<article class="card ${c[3]?'':'not'}"><div class="cardtop"><div class="icon">${c[2]}</div><div><h3>${c[0]}</h3><p>${c[1]}</p><span class="status ${c[3]?'inc':'out'}">${c[3]?'INCLUIDA':'NO INCLUIDA · DESCUENTO'}</span></div></div><div class="scale"><input id="a${i}" name="imp_${i}" type="radio" value="Imprescindible" required><label class="a" for="a${i}">Imprescindible</label><input id="b${i}" name="imp_${i}" type="radio" value="Muy importante"><label class="b" for="b${i}">Muy importante</label><input id="c${i}" name="imp_${i}" type="radio" value="Poco importante"><label class="c" for="c${i}">Poco importante</label><input id="d${i}" name="imp_${i}" type="radio" value="No me interesa"><label class="d" for="d${i}">No me interesa</label></div></article>`).join('');
-testForm.onsubmit=e=>{e.preventDefault();if(!interestForm.reportValidity())return;const d=Object.fromEntries(new FormData(testForm));Object.assign(d,Object.fromEntries(new FormData(interestForm)));cs.forEach((c,i)=>{d['cobertura_'+i]=c[0];d['estado_'+i]=c[3]?'Incluida':'No incluida'});d.fecha=new Date().toISOString();d.version='3.0';localStorage.setItem('senior_importancia_'+Date.now(),JSON.stringify(d));thanks.style.display='block'};
 </script></body>
 </html>

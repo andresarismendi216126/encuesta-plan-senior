@@ -6,19 +6,6 @@
     const description = annualBag.querySelector('p');
     if (description) description.textContent = annualBagDescription;
   }
-  const money = value => new Intl.NumberFormat('es-CO', {
-    style: 'currency', currency: 'COP', maximumFractionDigits: 0
-  }).format(value || 0);
-  const priceBox = document.querySelector('.prices');
-  const originalPriceField = priceBox?.closest('.field');
-  if (priceBox && originalPriceField) {
-    originalPriceField.innerHTML = '<label for="monto_mensual">¿Cuánto pagarías mensualmente por este plan?</label><input id="monto_mensual" name="monto_mensual" type="number" min="0" step="1000" required placeholder="Ej. 100000"><small id="annualEstimate">Pago anual con 10% de descuento: $0</small>';
-    const monthlyInput = document.getElementById('monto_mensual');
-    const annualEstimate = document.getElementById('annualEstimate');
-    monthlyInput.addEventListener('input', () => {
-      annualEstimate.textContent = `Pago anual con 10% de descuento: ${money(Number(monthlyInput.value) * 12 * 0.9)}`;
-    });
-  }
   document.querySelector('.price')?.remove();
   const form = document.getElementById('testForm');
   const interestForm = document.getElementById('interestForm');
@@ -29,21 +16,23 @@
     if (!interestForm.reportValidity() || !form.reportValidity()) return;
     const formData = Object.fromEntries(new FormData(form));
     const interestData = Object.fromEntries(new FormData(interestForm));
-    const monthly = Number(formData.monto_mensual);
     const importancias = Object.fromEntries(Object.entries(interestData).map(([key, value]) => [key, value]));
     importancias.bolsa_alta_complejidad_descripcion = annualBagDescription;
     const payload = {
       codigo_participante: formData.codigo,
       edad_mascota: formData.edad ? Number(formData.edad) : null,
+      estrato_socioeconomico: formData.estrato_socioeconomico ? Number(formData.estrato_socioeconomico) : null,
+      edad_persona: formData.edad_persona ? Number(formData.edad_persona) : null,
+      sexo_persona: formData.sexo_persona,
+      sexo_mascota: formData.sexo_mascota,
       intencion: formData.intencion,
       acepta_red_cerrada: formData.red,
-      monto_mensual: monthly,
-      monto_anual_descuento: Math.round(monthly * 12 * 0.9),
+      precio: formData.rango_precio,
       importancias_coberturas: importancias,
       comentario: formData.aceptacion_no_cubiertos,
       mejora: formData.mejora,
       fecha: new Date().toISOString(),
-      version_prototipo: '3.1',
+      version_prototipo: '3.2',
       modalidad: 'red prestacional cerrada sin reembolso externo'
     };
     localStorage.setItem(`senior_importancia_${Date.now()}`, JSON.stringify(payload));
