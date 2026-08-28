@@ -19,7 +19,7 @@
     const importancias = Object.fromEntries(Object.entries(interestData).map(([key, value]) => [key, value]));
     importancias.bolsa_alta_complejidad_descripcion = annualBagDescription;
     const payload = {
-      codigo_participante: formData.codigo,
+      codigo_participante: formData.nombre_completo,
       edad_mascota: formData.edad ? Number(formData.edad) : null,
       estrato_socioeconomico: formData.estrato_socioeconomico ? Number(formData.estrato_socioeconomico) : null,
       edad_persona: formData.edad_persona ? Number(formData.edad_persona) : null,
