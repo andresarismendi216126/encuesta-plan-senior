@@ -52,7 +52,12 @@
     const tableName = config.table || 'respuestas_senior_activa';
 
     try {
-      const response = await fetch(`${supabaseUrl}/rest/v1/${tableName}`, {
+      console.log('Enviando a:', supabaseUrl + '/rest/v1/' + tableName);
+      console.log('Config URL:', config.url);
+      console.log('Config tabla:', tableName);
+      
+      const fetchUrl = `${supabaseUrl}/rest/v1/${tableName}`;
+      const fetchOptions = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,17 +68,26 @@
         },
         mode: 'cors',
         body: JSON.stringify(payload)
-      });
-
+      };
+      
+      console.log('Headers:', fetchOptions.headers);
+      console.log('Body (primeros 100 chars):', JSON.stringify(payload).substring(0, 100));
+      
+      const response = await fetch(fetchUrl, fetchOptions);
+      
+      console.log('Status HTTP:', response.status, response.ok);
       const responseText = await response.text();
+      console.log('Respuesta del servidor:', responseText);
+      
       let errorMessage = 'No fue posible registrar la respuesta en Supabase';
 
       if (responseText) {
         try {
           const parsed = JSON.parse(responseText);
           if (parsed && parsed.message) errorMessage = parsed.message;
+          console.log('Error parsed:', parsed);
         } catch (parseError) {
-          console.warn('Supabase no devolvió JSON válido:', responseText);
+          console.warn('No es JSON valido:', responseText);
         }
       }
 
@@ -81,16 +95,18 @@
         throw new Error(`${errorMessage} (HTTP ${response.status})`);
       }
 
+      console.log('✅ Exitoso');
       thanks.innerHTML = '<b>Gracias.</b> Respuesta enviada correctamente.';
       thanks.style.display = 'block';
     } catch (error) {
-      console.error('Error al guardar la encuesta en Supabase:', error);
+      console.error('Error completo:', error);
+      console.error('Mensaje:', error.message);
       localStorage.setItem(`${localKey}_error`, JSON.stringify({
         payload,
         error: String(error),
         timestamp: new Date().toISOString()
       }));
-      thanks.innerHTML = '<b>La respuesta se guardó localmente.</b> No fue posible sincronizar con Supabase. Revisa la configuración del proyecto.';
+      thanks.innerHTML = '<b>Error:</b> ' + error.message + '<br><small>Respuesta guardada localmente.</small>';
       thanks.style.display = 'block';
     }
   }, { once: true });
