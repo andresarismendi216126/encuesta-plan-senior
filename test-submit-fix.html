@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Submit Fix</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .result { margin-top: 20px; padding: 10px; background: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <h1>Test: Button Submit</h1>
+  <form id="testForm">
+    <input type="text" name="test" value="valor" />
+    <button type="submit">Enviar</button>
+  </form>
+  
+  <div id="result" class="result" style="display:none;"></div>
+  
+  <script>
+    const form = document.getElementById('testForm');
+    const result = document.getElementById('result');
+    
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      console.log('✅ Submit detectado sin reload');
+      result.innerHTML = '<b>✅ Éxito:</b> El formulario se envió sin recargar la página. event.preventDefault() funcionó.';
+      result.style.display = 'block';
+    });
+  </script>
+</body>
+</html>

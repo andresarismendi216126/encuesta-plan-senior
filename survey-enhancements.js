@@ -109,5 +109,5 @@
       thanks.innerHTML = '<b>Error:</b> ' + error.message + '<br><small>Respuesta guardada localmente.</small>';
       thanks.style.display = 'block';
     }
-  }, { once: true });
+  });
 })();
