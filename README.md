@@ -15,6 +15,20 @@ GitHub Pages no procesa archivos `.env` en un HTML estático. Por eso el archivo
 
 La página pública únicamente puede insertar respuestas; no tiene permiso para consultarlas.
 
+## Publicar en InfinityFree
+
+InfinityFree puede alojar esta encuesta como sitio estático. No necesitas PHP, Node.js ni una base de datos en InfinityFree: las respuestas se envían directamente a Supabase desde el navegador.
+
+1. Ejecuta `supabase-schema.sql` en el **SQL Editor** de Supabase.
+2. Crea `config.js` a partir de `config.js.example` y reemplaza los valores de ejemplo por la URL y la clave pública `anon` de Supabase. Nunca uses `service_role`.
+3. En el panel de InfinityFree abre **File Manager** y entra en `htdocs` o `public_html`, según la carpeta que indique tu cuenta.
+4. Sube estos archivos a esa carpeta, todos en el mismo nivel: `index.html`, `config.js`, `survey-enhancements.js` y `zamonelli-ai-generated-8678181_1920.jpg`.
+5. Abre tu dominio en una ventana privada. Debe aparecer la encuesta y, al enviarla, el mensaje debe confirmar el envío a Supabase.
+
+El archivo `Prototipo_Cliente_Plan_Senior_Red_Cerrada.html` es la fuente editable; `index.html` es la copia que el servidor utiliza como página inicial. Si modificas la fuente, vuelve a copiarla como `index.html` antes de subirla.
+
+No subas `.env`, `.env.example`, `supabase-schema.sql`, `README.md`, `config.js.example`, la carpeta `.git` ni los workflows de GitHub Actions al hosting. `config.js` contiene una clave pública de navegador, pero debe configurarse solo en el servidor y permanecer ignorado por Git.
+
 Sin configuración, las respuestas se guardan únicamente en el navegador mediante `localStorage`; no son visibles para otros dispositivos.
 
 ## Revisar y descargar respuestas

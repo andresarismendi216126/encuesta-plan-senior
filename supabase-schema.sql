@@ -41,11 +41,11 @@ FOR INSERT
 TO authenticated
 WITH CHECK (true);
 
-CREATE POLICY "permitir_leer_anonimas"
-ON public.respuestas_senior_activa
-FOR SELECT
-TO anon
-USING (true);
+DROP POLICY IF EXISTS "permitir_leer_anonimas"
+ON public.respuestas_senior_activa;
+
+DROP POLICY IF EXISTS "permitir_leer_usuarios_autenticados"
+ON public.respuestas_senior_activa;
 
 CREATE INDEX IF NOT EXISTS idx_respuestas_fecha
 ON public.respuestas_senior_activa(fecha DESC);

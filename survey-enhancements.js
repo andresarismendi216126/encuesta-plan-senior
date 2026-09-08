@@ -1,7 +1,11 @@
 (() => {
   'use strict';
   
-  const config = window.SUPABASE_CONFIG || {};
+  const config = window.SUPABASE_CONFIG || {
+    url: 'https://browefuzmakvpksxqytm.supabase.co',
+    anonKey: 'sb_publishable_P_zWrKdGTuo6JmV-6aco9Q_HJk5H6wk',
+    table: 'respuestas_senior_activa'
+  };
   const annualBagDescription = 'Los $2.500.000 son el monto máximo total compartido para hospitalización, cirugía y/o urgencias. Puedes utilizar una, dos o las tres atenciones, pero la bolsa completa solo está disponible una vez por vigencia anual.';
   
   // Actualizar descripción de bolsa
@@ -113,7 +117,14 @@
       } else {
         const text = await response.text();
         console.error('Error HTTP', response.status, ':', text);
-        thanks.innerHTML = '<b>⚠️ Guardado localmente.</b> Supabase respondió con error HTTP ' + response.status;
+        let detail = text;
+        try {
+          const errorData = JSON.parse(text);
+          detail = errorData.message || errorData.hint || errorData.details || text;
+        } catch (parseError) {
+          // Mantener el texto original si Supabase no devuelve JSON.
+        }
+        thanks.innerHTML = '<b>Guardado localmente.</b> Supabase respondió con error HTTP ' + response.status + ': ' + detail;
       }
       
     } catch (error) {
