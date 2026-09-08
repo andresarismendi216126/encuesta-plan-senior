@@ -33,7 +33,7 @@ jobs:
           if [ -z "$SUPABASE_URL" ]; then echo "Falta SUPABASE_URL"; exit 1; fi
           if [ -z "$SUPABASE_ANON_KEY" ]; then echo "Falta SUPABASE_ANON_KEY"; exit 1; fi
           table="${SUPABASE_TABLE:-respuestas_senior_activa}"
-          cat > public/config.js <<EOF
+          cat > config.js <<EOF
           window.SUPABASE_CONFIG = {
             url: "$SUPABASE_URL",
             anonKey: "$SUPABASE_ANON_KEY",
@@ -44,10 +44,13 @@ jobs:
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Preparar página de entrada
+        run: cp Prototipo_Cliente_Plan_Senior_Red_Cerrada.html index.html
+
       - name: Crear artefacto
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: .
 
       - name: Publicar
         id: deployment

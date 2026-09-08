@@ -2,7 +2,7 @@
 .env
 .env.*
 !.env.example
-/config.js
+config.js
 
 # Archivos del sistema y del editor
 .DS_Store
